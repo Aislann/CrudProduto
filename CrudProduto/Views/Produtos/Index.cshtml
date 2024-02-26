@@ -1,0 +1,49 @@
+﻿@model IEnumerable<CrudProduto.Models.Produto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-center">Lista de Produtos</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Criar Novo</a>
+</p>
+<table class="table" id="tableProdutos">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.IdCategoriaNavigation) *@
+                Categoria
+            </th>
+            <th>
+                @* @Html.DisplayNameFor(model => model.IdFornecedorNavigation) *@
+                Fornecedor
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdCategoriaNavigation.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdFornecedorNavigation.Nome)
+            </td>
+            <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdProduto">Editar</a> |
+                    <a class="btn btn-success" asp-action="Details" asp-route-id="@item.IdProduto">Detalhes</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdProduto">Deletar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
